@@ -1,0 +1,115 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package JavaProject;
+
+import java.util.Scanner;
+
+public class ATMmachine {
+   double balance;
+   String name;
+   String yes;
+   String no;
+   long pincode;
+   String reciepent;
+   Scanner sc;
+
+   public ATMmachine() {
+      this.sc = new Scanner(System.in);
+   }
+
+   public void menu() {
+      System.out.println("===========================welcome to our ATM machine=========================");
+      System.out.println("Enter your name");
+      String name = this.sc.nextLine();
+      System.out.println("Enter your Mobile Number");
+      long Mno = this.sc.nextLong();
+      System.out.println("Please generate your Pincode");
+      long pincode = this.sc.nextLong();
+      System.out.println("your Account is created successfully");
+      this.op();
+   }
+
+   public void op() {
+      System.out.println("Welcome to our ATM sir/Mam" + this.name);
+      System.out.println("1. check Account");
+      System.out.println("2. deposit money");
+      System.out.println("3. withdraw money");
+      System.out.println("4. transfer money");
+      System.out.println("5. view account details");
+      System.out.println("0. Exit");
+      System.out.println(" enter a choice");
+   }
+
+   public void methods() {
+      int x = this.sc.nextInt();
+      if (x == 1) {
+         this.checkBalance();
+      } else if (x == 2) {
+         this.depositMoney();
+      } else if (x == 3) {
+         this.withdrawMoney();
+      } else if (x == 4) {
+         this.transferMoney();
+      } else if (x == 5) {
+         this.viewaccountDetails();
+      } else if (x == 0) {
+         System.out.println("=================================Thank you===========================");
+      } else {
+         System.out.println("Invalid Number. Please choose a valid number");
+      }
+
+   }
+
+   public void checkBalance() {
+      System.out.println(this.name + " your Account Balance :: " + this.balance);
+   }
+
+   public void depositMoney() {
+      long amount = this.sc.nextLong();
+      this.balance += (double)amount;
+      System.out.println(this.name + " your Account Balance :: " + this.balance);
+   }
+
+   public void withdrawMoney() {
+      long amount = this.sc.nextLong();
+      if ((double)amount <= this.balance) {
+         this.balance -= (double)amount;
+         System.out.println(this.name + " your Account Balance :: " + this.balance);
+      } else {
+         System.out.println("Insufficient balance");
+         System.out.println(" you have only" + this.balance + "in your Account");
+      }
+
+   }
+
+   public void transferMoney() {
+      long amount = this.sc.nextLong();
+      System.out.println("Enter the name of recipent");
+      String name = this.sc.nextLine();
+      System.out.println("Enter the amount you want to transfer");
+      long transferAmount = this.sc.nextLong();
+      if ((double)transferAmount <= this.balance) {
+         System.out.println("Amount transfer successfully to +reciepent");
+      } else {
+         System.out.println("you entered insufficient balance ");
+         System.out.println("entered 'yes' if you want to check your Account balance");
+         System.out.println("Enter 'No' if you want to Exit");
+         String userInput = this.sc.nextLine();
+         if (userInput == this.yes) {
+            this.checkBalance();
+         } else {
+            this.Exit();
+         }
+      }
+
+   }
+
+   public void viewaccountDetails() {
+      System.out.println("you have" + this.balance + "in your Account");
+      System.out.println("your pincode is" + this.pincode);
+      System.out.println("you currently transfer money to" + this.reciepent);
+   }
+
+   public void Exit() {
+      System.out.println("==========================================Thank you for using Atm====================================");
+   }
+}
